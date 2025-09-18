@@ -1,0 +1,6 @@
+USE fullstack_todo;
+
+INSERT INTO users (name, username, password, created_at) 
+VALUES ('Joao Pedro', 'Joao', '123', NOW());
+
+SELECT * FROM users WHERE email IN ('Joao');
