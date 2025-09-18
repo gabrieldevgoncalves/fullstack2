@@ -1,92 +1,260 @@
-# Desafio Técnico Fullstack2 - JTech
+J-Tech Tasklist — Monorepo (Frontend + Backend)
 
-## Sistema TODO List Multi-usuário com Arquitetura Avançada
+Aplicação full-stack de lista de tarefas.
+Frontend em Next.js + TypeScript + Zustand e backend em Spring Boot + JPA + MySQL.
 
-### Contextualização e Objetivo
+Sumário
 
-A **JTech** busca desenvolvedores frontend experientes capazes de construir aplicações robustas e escaláveis com arquitetura bem definida. Este desafio avalia sua competência em gerenciamento de estado complexo, arquitetura modular e implementação de sistemas multi-usuário.
+Arquitetura
 
-**Objetivo:** Desenvolver uma aplicação frontend sofisticada que simule um sistema TODO List multi-usuário, demonstrando expertise em arquitetura de componentes, gerenciamento de estado avançado e boas práticas de desenvolvimento.
+Requisitos
 
-## Especificações Técnicas
+Configuração do Backend (Java/Spring Boot)
 
-### Requisitos Funcionais
+Banco de Dados (MySQL)
 
-#### Sistema de Autenticação Simulada
+Arquivo application.yml
 
-1. **Interface de Login**: Tela de autenticação com validação de campos não vazios
-2. **Autenticação Mock**: Qualquer combinação válida de usuário/senha redireciona para a aplicação
-3. **Persistência de Sessão**: Manter dados do usuário logado no estado global da aplicação
+Seed: usuário Joao/123
 
-#### Gerenciamento Avançado de Listas
+Executar o backend
 
-1. **Múltiplas Listas de Tarefas**: Usuário pode criar listas categorizadas (ex: "Trabalho", "Estudos", "Pessoal")
-2. **CRUD Completo de Listas**:
-   * Criar novas listas com nomes personalizados
-   * Renomear listas existentes com validação
-   * Excluir listas com confirmação e verificação de dependências
-3. **Navegação entre Listas**: Interface intuitiva para alternar entre diferentes listas
+Swagger/OpenAPI
 
-#### Sistema Completo de Tarefas
+Erros comuns (e soluções)
 
-1. **Gerenciamento por Lista**: Cada lista mantém suas próprias tarefas independentemente
-2. **CRUD de Tarefas**: Adicionar, editar, remover e marcar tarefas como concluídas dentro de cada lista
-3. **Validações Avançadas**: Prevenção de duplicatas, validação de campos obrigatórios
+Configuração do Frontend (Next.js)
 
-#### Persistência e Navegação
+Variáveis de ambiente
 
-1. **Estado Persistente**: Todo o estado (usuário, listas, tarefas) gerenciado pelo Pinia e persistido em `localStorage`
-2. **Roteamento**: Vue Router para separar autenticação da aplicação principal
-3. **Guards de Rota**: Proteção de rotas para usuários não autenticados
+Executar o frontend
 
-### Requisitos Não Funcionais
+Login por username/senha
 
-#### Arquitetura e Organização
+Contrato da API (resumo prático)
 
-1. **Estrutura Modular**: Projeto organizado com separação clara de responsabilidades (views, components, stores, utils)
-2. **Componentização Avançada**: Componentes reutilizáveis com props tipadas e eventos bem definidos
-3. **Composables**: Utilização de composition functions para lógicas reutilizáveis
+Checklist de verificação rápida
 
-#### Experiência do Usuário
+Licença
 
-1. **Design Responsivo Premium**: Interface adaptável e consistente em todos os dispositivos
-2. **Feedback Interativo**: Notificações, loaders e animações para todas as ações do usuário
-3. **Estados de Loading**: Simulação de operações assíncronas com indicadores visuais
+Arquitetura
+backend/           # Spring Boot (Java 22), JPA, Security, Swagger
+frontend/          # Next.js 15 (App Router), TS, Zustand, RHF+Zod
 
-### Stack Tecnológica Obrigatória
 
-* **Framework**: Vue 3 (Composition API)
-* **Roteamento**: Vue Router 4
-* **Gerenciamento de Estado**: Pinia
-* **UI Framework**: Material Design (Vuetify ou biblioteca equivalente)
-* **Testes**: Vitest para testes unitários abrangentes
-* **TypeScript**: Fortemente recomendado para tipagem robusta
+Autenticação: username/senha no endpoint /auth/login.
 
-## Critérios de Avaliação
+Autorização: o backend pode exigir userId em query string para operações em listas/tarefas.
 
-* **Qualidade Arquitetural**: Código limpo, bem documentado e facilmente manutenível
-* **Aplicação de Boas Práticas**: Demonstração de Clean Code, KISS e componentização eficaz
-* **Arquitetura Modular**: Estrutura de projeto bem definida e organizada
-* **Gerenciamento de Estado**: Uso correto e eficiente do Pinia para estado complexo
-* **Qualidade dos Testes**: Cobertura abrangente testando componentes e stores
-* **Domínio da Stack**: Utilização avançada das ferramentas do ecossistema Vue.js
-* **Experiência do Usuário**: Interface intuitiva com excelente usabilidade
+Banco: MySQL 8 (ou compatível). HikariCP e Hibernate.
 
-## Expectativa de Entrega
+Requisitos
 
-* **Prazo**: Até 3 dias corridos a partir do recebimento.
-* **Formato**: Repositório Git com código-fonte completo e documentação detalhada.
+Java 22+
 
-### Estrutura Obrigatória do `README.md`
+Maven 3.9+
 
-1. **Visão Geral da Arquitetura**: Descrição detalhada da estrutura e decisões arquiteturais
-2. **Stack Tecnológica**: Lista completa com justificativas para cada escolha
-3. **Como Rodar Localmente**: Instruções passo a passo para setup e execução
-4. **Como Rodar os Testes**: Comandos para executar suite completa de testes
-5. **Estrutura de Pastas Detalhada**: Mapeamento completo da organização modular do código
-6. **Decisões Técnicas Aprofundadas**: Justificativas detalhadas sobre escolhas arquiteturais, padrões e bibliotecas
-7. **Melhorias e Roadmap**: Propostas técnicas para evolução e escalabilidade da aplicação
+MySQL 8+
 
----
+Node 18+ (recomendado 20+)
 
-**Boa sorte! A JTech espera uma solução que demonstre maturidade em desenvolvimento frontend e visão arquitetural.**
+npm 9+ (ou pnpm/yarn)
+
+Configuração do Backend (Java/Spring Boot)
+Banco de Dados (MySQL)
+
+Crie o banco e um usuário de acesso (ajuste nomes conforme preferir):
+
+CREATE DATABASE jtech_tasklist CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE USER 'jtech'@'%' IDENTIFIED BY 'secret';
+GRANT ALL PRIVILEGES ON jtech_tasklist.* TO 'jtech'@'%';
+FLUSH PRIVILEGES;
+
+
+Importante (MySQL + Hibernate): caso veja “Public Key Retrieval is not allowed”, use uma das soluções abaixo (a mais simples é ajustar a URL JDBC).
+
+Arquivo application.yml
+
+No diretório backend/fullstack-todo/src/main/resources/application.yml:
+
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/jtech_tasklist?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: jtech
+    password: secret
+  jpa:
+    hibernate:
+      ddl-auto: update   # ou validate, conforme preferência
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+# CORS (ajuste para a porta do seu frontend)
+cors:
+  allowed-origins: "http://localhost:3000"
+
+
+Se você guarda CORS via WebMvcConfigurer/SecurityFilterChain, mantenha como já está; acima é apenas referência.
+
+Seed: usuário Joao/123
+
+O backend já aceita username/senha. Basta inserir o usuário.
+Use Bcrypt para a senha "123".
+
+Gere um hash Bcrypt (qualquer forma que preferir). Exemplo rápido em Java:
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+public class Gen {
+  public static void main(String[] args) {
+    System.out.println(new BCryptPasswordEncoder().encode("123"));
+  }
+}
+
+
+Insira no banco (ajuste o nome da tabela/colunas conforme seu schema):
+
+-- opcional: índice único
+ALTER TABLE users ADD UNIQUE KEY uq_users_username (username);
+
+INSERT INTO users (username, password, email, role, enabled, created_at)
+VALUES ('Joao', '<BCRYPT_123>', 'joao@example.com', 'USER', 1, NOW())
+ON DUPLICATE KEY UPDATE username = VALUES(username);
+
+
+Substitua <BCRYPT_123> pelo hash gerado.
+Se seu backend cria usuários automaticamente, o passo acima pode ser opcional.
+
+Executar o backend
+
+Na pasta backend/fullstack-todo:
+
+mvn spring-boot:run
+# ou
+mvn -DskipTests package && java -jar target/fullstack-todo-*.jar
+
+
+Servidor em: http://localhost:8080
+
+Swagger/OpenAPI
+
+Com springdoc presente, os endpoints ficam em:
+
+Swagger UI: http://localhost:8080/swagger-ui.html
+
+OpenAPI JSON: http://localhost:8080/v3/api-docs
+
+Erros comuns (e soluções)
+
+Public Key Retrieval is not allowed (MySQL)
+
+Solução rápida: acrescente allowPublicKeyRetrieval=true&useSSL=false na URL JDBC (como no application.yml acima).
+
+Alternativa: criar o usuário com mysql_native_password.
+
+ALTER USER 'jtech'@'%' IDENTIFIED WITH mysql_native_password BY 'secret';
+FLUSH PRIVILEGES;
+
+
+MissingServletRequestParameterException: Required request parameter 'userId'...
+
+Seu backend exige userId como query param em algumas rotas (ex.: POST /lists?userId=1).
+
+Garanta que o frontend sempre envie ?userId=<ID_DO_USUARIO_LOGADO> nessas operações.
+
+Configuração do Frontend (Next.js)
+Variáveis de ambiente
+
+Crie frontend/.env.local:
+
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8080/api
+
+
+Se seu backend estiver em /api, mantenha; se não, ajuste para a raiz (http://localhost:8080).
+
+Executar o frontend
+
+Na pasta frontend/:
+
+npm install
+npm run dev
+
+
+App: http://localhost:3000
+
+Login por username/senha
+
+O formulário de login usa username e password.
+Para testar rapidamente, use:
+
+username: Joao
+
+password: 123
+
+Se quiser deixar pré-preenchido no form (opcional), defina defaultValues no seu login-form.tsx:
+
+const form = useForm<LoginRequest>({
+  defaultValues: { username: 'Joao', password: '123' }
+});
+
+
+Não mude o backend. O frontend já está adaptado ao contrato por username/senha.
+
+Contrato da API (resumo prático)
+
+Ajuste de nomes e caminhos se necessário — abaixo está o padrão mais comum, compatível com o que você descreveu e com springdoc no classpath.
+
+Auth
+
+POST /auth/login
+Body: { "username": "Joao", "password": "123" }
+Response (exemplo): { "token": "...", "user": { "id": 1, "username": "Joao" } }
+O frontend salva o token (se existir) e o user.id para usar como userId.
+
+Lists
+
+IMPORTANTE: se o backend exige userId, sempre inclua ?userId=<id>.
+
+GET /lists?userId=1 → TodoList[]
+
+POST /lists?userId=1
+Body: { "name": "Trabalho" } → TodoList
+
+PUT /lists/{listId}?userId=1
+Body: { "id": "xxx", "name": "Novo nome" } → TodoList
+
+DELETE /lists/{listId}?userId=1 → 204
+
+Tasks
+
+GET /lists/{listId}/tasks?userId=1 → Task[]
+
+POST /lists/{listId}/tasks?userId=1
+Body: { "listId": "...", "title": "Comprar café", "description": "500g" } → Task
+
+PUT /lists/{listId}/tasks/{taskId}?userId=1
+Body: { "listId": "...", "task": { "id": "...", "done": true } } → Task
+
+DELETE /lists/{listId}/tasks/{taskId}?userId=1 → 204
+
+Headers: se o backend usa JWT, envie Authorization: Bearer <token>.
+
+Checklist de verificação rápida
+
+ Backend sobe sem erro de MySQL (allowPublicKeyRetrieval=true se necessário).
+
+ Usuário Joao inserido com senha Bcrypt de "123".
+
+ NEXT_PUBLIC_API_BASE_URL aponta para o backend correto.
+
+ Frontend envia ?userId=<id> nas rotas que exigem (principal causa de 400 Bad Request).
+
+ Se JWT: header Authorization é aplicado nas requisições autenticadas.
